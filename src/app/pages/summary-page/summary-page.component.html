@@ -1,0 +1,45 @@
+<div *ngIf="products.length > 0; else noProducts" class="mx-5 ">
+
+  <div class="d-flex justify-content-between align-items-center">
+    <h3 class="my-2">RESUMEN DE COMPRA </h3>
+   
+  </div>
+ <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">CATEGORIA</th>
+        <th scope="col">DESCRIPCION</th>
+        <th scope="col">PRECIO</th>
+      </tr>
+    </thead>
+    <tbody  *ngFor="let p of this.products">
+      <tr>
+        <td scope="row">{{ p.productId }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.productCategoryId }}</td>
+        <td>{{ p.description }}</td>
+        <td>$ {{ p.price }}</td>
+      </tr>
+
+    </tbody>
+  </table> 
+
+  <div class="d-flex flex-column text-center mt-2">
+     <p> {{ countProducts }} PRODUCTOS</p>
+     <p class="font-weight-bold" style="font-size: 20px">TOTAL: $ {{ totalcart }}</p>
+  </div>
+</div>
+
+<ng-template #noProducts>
+  <div class="text-center mt-3"  *ngIf="loading == false; else loadingdiv">
+    <h3>No se encontraron productos :/ </h3>
+    <button type="button" class="btn btn-primary" routerLink="/">IR A PRODUCTOS</button>
+  </div>
+</ng-template>
+
+<ng-template #loadingdiv>  
+  <div class="text-center mt-3" #loadingdiv>
+      <h3> Cargando Resumen de compra...</h3>
+  </div>

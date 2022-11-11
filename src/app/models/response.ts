@@ -1,4 +1,4 @@
 export class Response {
-    token: string;
-    userDetails: object;
+    token?: string;
+    userDetails?: object;
 }

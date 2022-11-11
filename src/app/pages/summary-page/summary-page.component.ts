@@ -1,27 +1,30 @@
-import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
+import { Product } from './../../models/product';
 import { ProductsService } from './../../services/products.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-shopping-cart-list',
-  templateUrl: './shopping-cart-list.component.html',
-  styleUrls: ['./shopping-cart-list.component.css']
+  selector: 'app-summary-page',
+  templateUrl: './summary-page.component.html',
+  styleUrls: ['./summary-page.component.css']
 })
-export class ShoppingCartListComponent implements OnInit {
-
+export class SummaryPageComponent implements OnInit {
 
   countProducts: number = 0 ;
 
+  totalcart: number = 0
+
   loading: boolean = true;
   
-  @Input() productsIds: any = [];
+  productsIds: [] = [];
 
   products: any = [];
-  constructor(private _router: Router, private _productsService: ProductsService ) { }
+  constructor(private _productsService: ProductsService ) { }
 
   ngOnInit(): void {
     this.loading = true
+
+    this.productsIds = JSON.parse(localStorage.getItem('productsIds') || '[]');
+    console.log('IDS  ', this.productsIds)
     this.getProducts()
   }
 
@@ -36,13 +39,15 @@ export class ShoppingCartListComponent implements OnInit {
     
   }
 
-
-
   filtrarProducts(){
     let productsFilters:any = [];
     this.productsIds.map((id:number) => {
+      console.log('ID ', id)
       this.products.forEach( (prod: Product) => {
           if(prod.productId == id){
+            if(prod.price){
+              this.totalcart = this.totalcart + prod.price
+            } 
             productsFilters.push(prod)
           }
       }); 
@@ -53,17 +58,18 @@ export class ShoppingCartListComponent implements OnInit {
 
     deleteCart(id:number){
     let some = this.products.some((prod: Product) => prod.productId == id);
+    let prod:Product =  this.products.find((prod: Product) => prod.productId == id);
+
+    console.log('SOME ', some)
     if(some){
-      this.products = this.products.filter((prod: Product) => prod.productId != id);
-      this.productsIds = this.productsIds.filter((idP:number) => idP != id);
+
+      this.products = this.products.filter((prod: Product) => prod.productId != id)
+      if(prod.price){
+        this.totalcart = this.totalcart - prod.price
+      }
+      
       this.countProducts = this.countProducts - 1;
     }
   }
 
-  goSummary(){
-    console.log('LOS IDS ' , this.productsIds)
-    localStorage.setItem('productsIds', JSON.stringify(this.productsIds))
-    this._router.navigate(['/summary'])
-    
-  }
 }

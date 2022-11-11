@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { ShoppingCartListComponent } from './components/shopping-cart-list/shopping-cart-list.component';
+import { SummaryPageComponent } from './pages/summary-page/summary-page.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ShoppingCartListComponent } from './components/shopping-cart-list/shopp
     ProductsListComponent,
     LoginPageComponent,
     ShoppingCartPageComponent,
-    ShoppingCartListComponent
+    ShoppingCartListComponent,
+    SummaryPageComponent
   ],
   imports: [
     BrowserModule,
