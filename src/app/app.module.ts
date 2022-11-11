@@ -8,13 +8,19 @@ import { ProductsListComponent } from './components/products-list/products-list.
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
+import { ShoppingCartListComponent } from './components/shopping-cart-list/shopping-cart-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsPageComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    LoginPageComponent,
+    ShoppingCartPageComponent,
+    ShoppingCartListComponent
   ],
   imports: [
     BrowserModule,

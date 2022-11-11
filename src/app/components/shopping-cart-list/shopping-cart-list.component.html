@@ -1,0 +1,42 @@
+
+<div *ngIf="products.length > 0; else noProducts" class="mx-5 ">
+
+  <div class="d-flex justify-content-between align-items-center">
+    <h3 class="my-2">CARRITO DE COMPRAS </h3>
+    <span> {{ countProducts }} PRODUCTOS TOTAL</span>
+  </div>
+ <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">CATEGORIA</th>
+        <th scope="col">DESCRIPCION</th>
+        <th scope="col">PRECIO</th>
+        <th scope="col" class="text-center">ACCION</th>
+      </tr>
+    </thead>
+    <tbody  *ngFor="let p of this.products">
+      <tr>
+        <td scope="row">{{ p.productId }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.productCategoryId }}</td>
+        <td>{{ p.description }}</td>
+        <td>$ {{ p.price }}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-danger"  (click)="deleteCart(p.productId)">ELIMINAR
+          <svg style="width: 18px;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
+        </button></td>
+      </tr>
+
+    </tbody>
+  </table> 
+
+</div>
+
+<ng-template #noProducts>
+  <div class="text-center mt-3">
+    <h3>No se encontraron productos :( </h3>
+    <button type="button" class="btn btn-primary" routerLink="/">IR A PRODUCTOS</button>
+  </div>
+</ng-template>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service'
 import { CategoriesService} from '../../services/categories.service'
 import { Product } from 'src/app/models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
@@ -18,7 +19,7 @@ export class ProductsListComponent implements OnInit {
   loading: boolean = false;
   countProducts: number = 0;
   seleccionado: any = '-1'
-  constructor(private _productsService: ProductsService, private _categoryService:CategoriesService) { }
+  constructor(private route: Router, private _productsService: ProductsService, private _categoryService:CategoriesService) { }
 
   ngOnInit(): void {
 
@@ -39,7 +40,8 @@ export class ProductsListComponent implements OnInit {
   addCart(id:number){
     let some = this.productsSelected.some((idProd:any) => idProd == id);
     if(!some){
-      this.productsSelected.push(id)
+      this.productsSelected.push(id);
+      console.log('PS ', this.productsSelected)
       this.countProducts = this.countProducts + 1; 
     }
   }
@@ -69,6 +71,10 @@ export class ProductsListComponent implements OnInit {
      this.productsFilters = this.products
    }
     
+  }
+
+  irCarrito(){
+    this.route.navigate(['/shopping-cart'],{queryParams: [this.productsSelected] })
   }
 
 

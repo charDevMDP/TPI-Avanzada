@@ -1,7 +1,7 @@
 <div class="py-5 mb-5">
 
   <div class="mb-5 mx-5 d-flex justify-content-between align-items-center" *ngIf="productsFilters.length > 0;">
-    <div>    
+    <div >    
       <p class="">Filtrar por categoria</p>
       <select class="form-control" [(ngModel)]="seleccionado" (change)='Filtrar()'>
         <option value="-1">Ver Todos</option>
@@ -10,15 +10,18 @@
           </option> 
       </select>
     </div>
-    <div>
-      <button type="button" class="btn btn-primary"> {{ countProducts }} SELECCIONADOS           
+    <div *ngIf="productsSelected.length >= 1">
+      <button type="button" class="btn btn-primary" (click)="irCarrito()">  IR AL CARRITO         
         <svg style="width: 18px;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg></button>
     </div>
   </div>
 
 <div *ngIf="productsFilters.length > 0; else noProducts" class="mx-5 ">
 
-  <h3 class="my-2">PRODUCTOS </h3>
+  <div class="d-flex justify-content-between align-items-center">
+    <h3 class="my-2">PRODUCTOS </h3>
+    <span> {{ countProducts }} PRODUCTOS SELECCIONADOS</span>
+  </div>
  <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
