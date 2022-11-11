@@ -1,0 +1,83 @@
+  <div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+              <div class="card-body p-4 p-sm-5" >
+                <h5 class="card-title text-center mb-4 fw-light fs-5">INICIAR SESION</h5>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  
+                  <div class="form-floating mb-2">
+                    <label for="floatingInput">Email</label>
+                    <input 
+                    type="email" 
+                    class="form-control" 
+                    formControlName="email" 
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                    [class.is-invalid]='loginForm.get("email")?.touched && loginForm.get("email")?.invalid'
+                    >
+                  </div>
+  
+                  <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']"
+                        class="alert alert-danger" style="padding: 0;">
+                        <span style="padding-left: 10px;"><small>El email es obligatorio</small></span>
+                    </div>
+
+                  <div class="form-floating mb-3 mt-3">
+                      <label for="floatingPassword">Contraseña</label>
+                    <input 
+                    type="password" 
+                    class="form-control" 
+                    formControlName="password" 
+                    id="floatingPassword" 
+                    placeholder="Password"
+                    [class.is-invalid]='loginForm.get("password")?.touched && loginForm.get("password")?.invalid'
+                    >
+                  </div>
+    
+                    <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors">
+
+                        <div *ngIf="loginForm.get('password')?.errors?.['required']" class="alert alert-danger" style="padding:0">
+                            <span style="padding-left: 10px;"><small>Contraseña es obligatorio</small> </span>
+                        </div>
+                        <div *ngIf="loginForm.get('password')?.errors?.['minlength']"  class="alert alert-danger"  style="padding:0">
+                            <span style="padding-left: 10px;"><small>La Contraseña debe tener al menos 6 caracteres</small> </span>
+                        </div>
+                    
+                    </div>
+
+                  <div class="d-grid">
+                    <button class="btn btn-block btn-primary btn-login text-uppercase fw-bold" type="submit" [disabled]='!loginForm.valid || loading'>INICIAR</button>
+                  </div>
+                 <div *ngIf="this.loading"class='mt-2 text-center'>
+                    <span>Iniciando...</span>
+                 </div>
+                  <div *ngIf="this.error_msg != '' "class='mt-2 text-center'>
+                    <span class="text-danger">{{ error_msg }}</span>
+                 </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="container mx-auto text-center">
+          <p>
+              "userId": 1,
+              "userTypeId": 2,
+              "name": "Trev Duck",
+              "email": "tduck0@fema.gov",
+              "password": "7ZQX5Vno"
+          </p>
+          <p>
+              "userId": 2,
+              "userTypeId": 1,
+              "name": "Marcelia Moquin",
+              "email": "mmoquin1@engadget.com",
+              "password": "O2PTLXKPPqL"
+            
+          </p>
+        </div>
+
+      </div>
+  

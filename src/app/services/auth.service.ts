@@ -5,6 +5,8 @@ import { User } from '../models/user';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Response } from '../models/response';
 
+import { map, catchError } from 'rxjs/operators';
+import {throwError as observableThrowError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,7 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router: Router) {}
 
-  login(user:User): Observable<any>{
+  login(user:User):any{
 
     // configuracion para para peticion
     const httpOptions = {
@@ -28,18 +30,8 @@ export class AuthService {
       })
     };
 
-    const obs = this.http.post(this.url+'/User/Login',user,httpOptions);
+    return this.http.post(this.url+'/User/Login',user,httpOptions);
 
-    obs.subscribe((response:any) => {
-      
-      this.token = response['token'];
-      this.user = response['userDetails']
-      localStorage.setItem('token', this.token);
-      this.isLogged = true;
-      this.router.navigate([''])
-    }, error => { console.log('ERROR AL INTENTAR INICIAR SESION')})
-
-      return obs;
   }
 
   getToken(){
